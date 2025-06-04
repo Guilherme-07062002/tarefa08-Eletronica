@@ -6,7 +6,7 @@
 #include "buzzer.h"
 
 /**
- * @brief Inicializa periféricos: UART, I2C, display OLED e botões.
+ * @brief Inicializa periféricos: botão, LEDs e buzzer.
  */
 void inicializa() {
     stdio_init_all();
@@ -15,19 +15,34 @@ void inicializa() {
     pwm_init_buzzer(BUZZER_PIN);
 }
 
+/**
+ * @brief Toca um alerta sonoro e acende o LED vermelho.
+ */
 void toca_alerta() {
-    beep(BUZZER_PIN, 500); // Toca o alerta por 500ms
     red_led_on(); // Acende o LED vermelho
+    beep(BUZZER_PIN, 500); // Toca o alerta por 500ms
 }
 
 /**
  * @brief Comportamento principal do programa.
- * Lê o valor da DIP switch ao pressionar o botão B e exibe no display e console.
+ * Simula o comportamento do sensor de chamas, acionando o alerta quando o botão B é pressionado.
+ * Enquanto o botão B estiver pressionado, o alerta continuará sendo emitido.
  */
-void comportamento_principal() {
-    while (button_b_is_pressed()) {
-        toca_alerta(); // Toca o alerta enquanto o botão B estiver pressionado
-        printf("Botão B pressionado!\n");
+void comportamento_principal_simulado() {
+    static bool alerta_ativo = false;
+    if (button_b_is_pressed()) {
+        if (!alerta_ativo) {
+            red_led_on();
+            buzzer_on(BUZZER_PIN);
+            printf("Botão B pressionado!\n");
+            alerta_ativo = true;
+        }
+    } else {
+        if (alerta_ativo) {
+            red_led_off();
+            buzzer_off(BUZZER_PIN);
+            alerta_ativo = false;
+        }
     }
 }
 
@@ -37,7 +52,7 @@ void comportamento_principal() {
 int main() {
     inicializa();
     while (1) {
-        comportamento_principal();
+        comportamento_principal_simulado();
         sleep_ms(100);
     }
     return 0;
