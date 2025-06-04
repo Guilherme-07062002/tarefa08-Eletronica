@@ -23,6 +23,14 @@ void red_led_on() {
     gpio_put(RED_LED_PIN, 1);
 }
 
+void red_led_off() {
+    // Se já estiver apagado, não faz nada
+    if (!gpio_get(RED_LED_PIN)) return;
+
+    // Apaga o LED vermelho
+    gpio_put(RED_LED_PIN, 0);
+}
+
 void green_led_on() {
     // Se já estiver aceso, não faz nada
     if (gpio_get(GREEN_LED_PIN)) return;
@@ -30,4 +38,12 @@ void green_led_on() {
     // Apaga o LED vermelho e acende o LED verde
     gpio_put(RED_LED_PIN, 0);
     gpio_put(GREEN_LED_PIN, 1);
+}
+
+void green_led_off() {
+    // Se já estiver apagado, não faz nada
+    if (!gpio_get(GREEN_LED_PIN)) return;
+
+    // Apaga o LED verde
+    gpio_put(GREEN_LED_PIN, 0);
 }

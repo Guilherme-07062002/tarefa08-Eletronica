@@ -18,8 +18,18 @@ void init_leds();
 void red_led_on();
 
 /**
+ * @brief Apaga o LED vermelho.
+ */
+void red_led_off();
+
+/**
  * @brief Acende o LED verde e apaga o LED vermelho.
  */
 void green_led_on();
+
+/**
+ * @brief Apaga o LED verde.
+ */
+void green_led_off();
 
 #endif // LED_H

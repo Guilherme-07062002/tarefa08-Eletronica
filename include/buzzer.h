@@ -17,10 +17,21 @@
 void pwm_init_buzzer(uint pin);
 
 /**
- * Emite um beep no buzzer por um determinado período.
+ * Liga o buzzer, ativando o sinal PWM com duty cycle de 50%.
  * @param pin Pino GPIO onde o buzzer está conectado.
- * @param duration_ms Duração do beep em milissegundos.
  */
-void beep(uint pin, uint duration_ms);
+void buzzer_on(uint pin);
+
+/**
+ * Desliga o buzzer, desativando o sinal PWM (duty cycle 0).
+ * @param pin Pino GPIO onde o buzzer está conectado.
+ */
+void buzzer_off(uint pin);
+
+/**
+ * Emite um alerta sonoro com o buzzer.
+ * Liga o buzzer por 1 segundo e depois desliga.
+ */
+void buzzer_alert();
 
 #endif // BUZZER_H
