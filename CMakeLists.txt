@@ -41,6 +41,7 @@ add_executable(tarefa8
     src/expansion_board.c
     src/buzzer.c
     src/led.c
+    src/flame_sensor.c
     )
 
 pico_set_program_name(tarefa8 "tarefa8")

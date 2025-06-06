@@ -10,4 +10,6 @@
  */
 extern bool program_running;
 
+#define FLAME_SENSOR_PIN 8 // GPIO utilizado para ler o sensor de chamas
+
 #endif // GLOBALS_H
